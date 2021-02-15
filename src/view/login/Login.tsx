@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './login.scss';
 import '../../index.scss'
 import Error from '../../components/error/Error';
-
+import Spinner from '../../components/spinner/Spinner';
 import{ login } from '../../api/login';
 
 
@@ -32,19 +32,25 @@ function Login(props:any){
             setLoading(false);
             return;
         }
+        setError({
+            err:false,
+            msg:''
+        });
 
-        login(user)
-        .then( res => {
-            setLoading(false);
-            props.history.push('/dashboard');
-        })
-        .catch(err => {
-            setLoading(false);
-            setError({
-                err:true,
-                msg:err
-            });
-        })
+        setTimeout(()=>{
+            login(user)
+            .then( res => {
+                setLoading(false);
+                props.history.push('/dashboard');
+            })
+            .catch(err => {
+                setLoading(false);
+                setError({
+                    err:true,
+                    msg:err
+                });
+            })
+        }, 2000)
     }
 
     return(
@@ -55,9 +61,14 @@ function Login(props:any){
                         <input className="from-inputs" name="username" type="text" placeholder="username"></input>
                         <input className="from-inputs" name="password" type="password" placeholder="passwords"></input>
                     </div>
-                    <div className="content-buttons">
-                        <button type="submit" className="form-button"> Login </button>
-                    </div>
+                    { loading ? 
+                        <Spinner />
+                        :
+                        <div className="content-buttons">
+                            <button type="submit" className="form-button"> Login </button>
+                        </div>
+                    }
+                    
 
                     {error.err ? 
                         <div>
