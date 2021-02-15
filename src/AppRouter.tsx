@@ -11,7 +11,6 @@ function AppRouter() {
           <Route path="/" exact component={Login} />
         </Switch>
       </Layout>
-          
     </BrowserRouter>
   );
 }
