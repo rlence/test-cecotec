@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import './login.scss';
 import '../../index.scss'
+import Error from '../../components/error/Error';
+
+import{ login } from '../../api/login';
 
 
-function Login(){
-
+function Login(props:any){
+    console.log(props);
     const [user, setUser] = useState({
-        user:'',
+        username:'',
         password:''
     });
 
@@ -24,16 +27,33 @@ function Login(){
     const handelSubmit = (e:any) => {
         e.preventDefault();
         setLoading(true);
-        
+        if(user.username == '' || user.password == ''){
+            setError({err:true, msg:"Por favor rellene todos los campos"});
+            setLoading(false);
+            return;
+        }
+
+        login(user)
+        .then( res => {
+            setLoading(false);
+            props.history.push('/dashboard');
+        })
+        .catch(err => {
+            setLoading(false);
+            setError({
+                err:true,
+                msg:err
+            });
+        })
     }
 
     return(
         <div className="container">
             <div className="card card-body">
-                <form onChange={handelChange}>
+                <form onChange={handelChange} onSubmit={handelSubmit}>
                     <div className=" column content-card">
-                        <input className="from-inputs" type="text" placeholder="username"></input>
-                        <input className="from-inputs" type="password" placeholder="passwords"></input>
+                        <input className="from-inputs" name="username" type="text" placeholder="username"></input>
+                        <input className="from-inputs" name="password" type="password" placeholder="passwords"></input>
                     </div>
                     <div className="content-buttons">
                         <button type="submit" className="form-button"> Login </button>
@@ -41,7 +61,7 @@ function Login(){
 
                     {error.err ? 
                         <div>
-                            <p>{error.msg}</p>
+                            <Error msg={error.msg} />
                         </div>
                         : null
                     }
