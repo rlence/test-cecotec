@@ -14,7 +14,7 @@ interface User {
         });
         const data = await res.json();
         console.log(data);
-        if(user.username != data.name && user.password != data.password){
+        if(user.username != data.name || user.password != data.password){
             return Promise.reject('user o contraseña incorrectos'); 
         }
 

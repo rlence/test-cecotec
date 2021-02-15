@@ -7,7 +7,7 @@ import{ login } from '../../api/login';
 
 
 function Login(props:any){
-    console.log(props);
+  
     const [user, setUser] = useState({
         username:'',
         password:''
