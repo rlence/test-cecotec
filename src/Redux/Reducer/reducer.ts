@@ -1,10 +1,3 @@
-interface State {
-    isAuth:boolean,
-    path:string,
-    client:string[],
-    product:string[]
-}
-
 const initialState = {
     isAuth:false,
     path:'/',
@@ -15,10 +8,12 @@ const initialState = {
 
 export const actionTypes = {
     IS_AUTH:'LOGIN',
-    PATH:'PAHT'
+    PATH:'PAHT',
+    CLIENT:'ADD-CLIENT',
+    PRODUCT:'ADD-PRODUCT'
 }
 
-export default (state:State = initialState, action:any ) => {
+export default (state = initialState, action:any ) => {
 
     switch(action.type){
 
@@ -32,6 +27,17 @@ export default (state:State = initialState, action:any ) => {
             return{
                 ...state,
                 path: action.payload
+            }
+
+        case actionTypes.CLIENT:
+            return{
+                 ...state,
+                 client: action.payload
+            }
+        case actionTypes.PRODUCT:
+             return{
+                ...state,
+                product: action.payload
             }
         
         default:

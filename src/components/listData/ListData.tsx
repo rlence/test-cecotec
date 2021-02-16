@@ -15,8 +15,31 @@ function ListData(props:any){
     })
 
     useEffect(()=>{
-        setLoading(true);
-    },[])
+       
+    },[props.data, props.error])
+
+    const listToprint = () => {
+
+        if(props.data.length == 0 && props.error == false){
+            return <Spinner />
+
+        }else if(props.data.length == 0 && props.error == true){
+            return <Error msg="Se produjo un error" />
+
+        }else{
+            return props.data.map( ( dato:any, key:number ) => {
+                console.log(dato)
+                return (
+                    <li className="row">
+                        <p> {dato.id} </p>
+                        <p> {dato.name} </p>
+                        <p> {dato[props.text]} </p>
+                    </li>
+                )
+
+            });
+        }
+    }
 
     return(
         <div className="card content-list-data">
@@ -25,11 +48,7 @@ function ListData(props:any){
             </div>
             <div className="body-card">
                 <ul>
-                    <li className="row">
-                        <p>id</p>
-                        <p> cliente name || product name</p>
-                        <p> create date</p>
-                    </li>
+                    {listToprint()}
                 </ul>
             </div>
         </div>

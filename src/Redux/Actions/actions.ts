@@ -9,9 +9,23 @@ export const userLogin = (isAuth:boolean) => {
 }
 
 export const changePath = (path:string) => {
-    console.log('en el path', path)
+ 
     return {
         type: actionTypes.PATH,
         payload:path
+    }
+}
+
+export const saveListClient = (clients:any) => {
+    return{
+        type: actionTypes.CLIENT,
+        payload: clients
+    }
+}
+
+export const saveListProduct = (product:any) => {
+    return{
+        type: actionTypes.PRODUCT,
+        payload: product
     }
 }
