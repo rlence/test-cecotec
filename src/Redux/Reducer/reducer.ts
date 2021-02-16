@@ -2,7 +2,9 @@ const initialState = {
     isAuth:false,
     path:'/',
     client:[],
-    product:[]
+    product:[],
+    selectClient:{},
+    selectedProduct:{}
 }
 
 
@@ -10,7 +12,9 @@ export const actionTypes = {
     IS_AUTH:'LOGIN',
     PATH:'PAHT',
     CLIENT:'ADD-CLIENT',
-    PRODUCT:'ADD-PRODUCT'
+    PRODUCT:'ADD-PRODUCT',
+    ONECLIENT:'SELECTED-CLIENT',
+    ONEPRODUCT:'SELECTED-PRODUCT'
 }
 
 export default (state = initialState, action:any ) => {
@@ -38,6 +42,18 @@ export default (state = initialState, action:any ) => {
              return{
                 ...state,
                 product: action.payload
+            }
+
+        case actionTypes.ONECLIENT:
+            return{
+                ...state,
+                selectClient: action.payload
+            }
+
+        case actionTypes.ONEPRODUCT:
+            return{
+                ...state,
+                selectedProduct: action.payload
             }
         
         default:

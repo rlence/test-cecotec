@@ -44,6 +44,7 @@ function Dashboard(props:any){
                         data={props.clients}
                         error={errClient}
                         text='date'
+                        to="/edit/client"
                     />
                 </div>
                 <div  className="list">
@@ -52,6 +53,7 @@ function Dashboard(props:any){
                         data={props.product}
                         error={errProduct}
                         text='price'
+                        to='/edit/product'
                     />
                 </div>
             </div>

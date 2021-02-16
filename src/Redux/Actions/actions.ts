@@ -29,3 +29,17 @@ export const saveListProduct = (product:any) => {
         payload: product
     }
 }
+
+export const selectedClient = (client:any) => {
+    return{
+        type: actionTypes.ONECLIENT,
+        payload: client
+    }
+}
+
+export const selectedProduct = (product:any) => {
+    return{
+        type: actionTypes.ONEPRODUCT,
+        payload: product
+    }
+}

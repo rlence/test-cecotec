@@ -1,22 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import '../../index.scss';
 import './listData.scss';
 import { connect } from 'react-redux';
 import Spinner from '../spinner/Spinner';
 import Error from '../error/Error';
-
+import {selectedClient, selectedProduct} from '../../Redux/Actions/actions';
 
 function ListData(props:any){
 
-    const [loading , setLoading] = useState(false);
-    const [error, setError] = useState({
-        err:false,
-        msg:''
-    })
+    const [redirect, setRedirect] = useState(false);
 
-    useEffect(()=>{
-       
-    },[props.data, props.error])
+    const handleClick = (e:any, data:any) => {
+        e.preventDefault();
+        const type = props.to.split('/');
+        if(type[2] == 'client'){
+            props.selectOneClient(data)
+        }else{  
+            props.selectOnProduct(data)
+        }
+        setRedirect(true);
+    }
 
     const listToprint = () => {
 
@@ -28,9 +32,8 @@ function ListData(props:any){
 
         }else{
             return props.data.map( ( dato:any, key:number ) => {
-                console.log(dato)
                 return (
-                    <li className="row">
+                    <li key={key} onClick={(e) => handleClick(e, dato)} className="row">
                         <p> {dato.id} </p>
                         <p> {dato.name} </p>
                         <p> {dato[props.text]} </p>
@@ -51,10 +54,22 @@ function ListData(props:any){
                     {listToprint()}
                 </ul>
             </div>
+            { redirect ? 
+                <Redirect to={props.to} />
+                : null
+            }
         </div>
     )
 
 }
 
-export default connect(null, null)(ListData);
+const mapDispatchToProps = (dispatch:any, props:any) => {
+    return {
+        selectOneClient: (client:any) => dispatch(selectedClient(client)),
+        selectOnProduct: (products:any) => dispatch(selectedProduct(products)),
+
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ListData);
 
