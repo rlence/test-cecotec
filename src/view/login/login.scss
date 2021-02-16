@@ -1,32 +1,71 @@
-.card-body{
-    width: 40%;
-    margin: auto;
-    padding: 3%;
 
-    .content-card{  
+.container{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    background-color: #206f7e ;
+
+    .card-body{
+        width: 40%;
         margin: auto;
-        width: 80%;
-
-        .from-inputs{
-            border-radius: 15px;
-            margin: 5% 0px;
-            padding: 2%;
-            border: 1px solid rgb(177, 177, 177);
+        padding: 3%;
+    
+        .content-card{  
+            margin: auto;
+            width: 80%;
+    
+            .from-inputs{
+                border-radius: 15px;
+                margin: 5% 0px;
+                padding: 2%;
+                border: 1px solid rgb(177, 177, 177);
+            }
         }
-    }
-
-    .content-buttons{
-        margin: auto;
-        width: 80%;
-
-        .form-button{
-            margin: 2%;
-            width: 100%;
-            padding: 2%;
-            color: #ffff;
-            background-color: #198753;
-            border-radius: 15px;
-            border: none;
+    
+        .content-buttons{
+            margin: auto;
+            width: 80%;
+    
+            .form-button{
+                margin: 2%;
+                width: 100%;
+                padding: 2%;
+                color: #ffff;
+                background-color: #198753;
+                border-radius: 15px;
+                border: none;
+            }
         }
     }
 }
+
+@media screen and (max-width: 992px) {
+    .card-body{
+        width: 70% !important;
+
+        .from-inputs{
+            padding: 3% !important;
+        }
+
+        .form-button{
+            padding: 3% !important;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .card-body{
+        width: 90% !important;
+        height: 30%;
+    }
+
+    .from-inputs{
+        padding: 4% !important;
+    }
+
+    .form-button{
+        padding: 4% !important;
+    }
+}
+
+

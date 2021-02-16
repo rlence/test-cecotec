@@ -44,7 +44,7 @@ function Login(props:any){
             .then( res => {
                 setLoading(false);
                 props.isAuthUser(true);
-                props.history.push('/dashboard');
+                //props.history.push('/dashboard');
             })
             .catch(err => {
                 setLoading(false);

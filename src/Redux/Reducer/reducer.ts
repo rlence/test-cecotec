@@ -27,6 +27,7 @@ export default (state:State = initialState, action:Action ) => {
     switch(action.type){
 
         case actionTypes.IS_AUTH:
+            console.log('action', action.payload)
             return{
                 ...state,
                 isAuth: action.payload

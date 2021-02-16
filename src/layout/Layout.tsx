@@ -1,11 +1,13 @@
 import React from 'react';
+import Navbar from '../components/navbar/Navbar';
+import {connect} from 'react-redux';
 
 function Layout(props:any){
-
+    console.log(props, 'layOut')
     return(
         <div>
             <div className="">
-                aqui va el navbar
+                {props.path == '/' ? <Navbar /> : null}
             </div>
             <div>
                 {props.children}
@@ -14,6 +16,11 @@ function Layout(props:any){
     )
 }
 
+const mapStateToProps = (state:any, props:any) => {
+    return {
+        path:state.path
+    }
+}
 
 
-export default Layout;
+export default connect(mapStateToProps, null)(Layout);
