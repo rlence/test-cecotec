@@ -20,6 +20,13 @@ function ListData(props:any){
             props.selectOnProduct(data)
         }
         setRedirect(true);
+    }  
+
+    const confimeDelete = (e:any, dato:any) =>{
+        props.setModal(true);
+        const type = props.to.split('/');
+        dato.type = type[2];
+        props.setDataModal(dato)
     }
 
     const listToprint = () => {
@@ -33,11 +40,14 @@ function ListData(props:any){
         }else{
             return props.data.map( ( dato:any, key:number ) => {
                 return (
-                    <li key={key} onClick={(e) => handleClick(e, dato)} className="row">
-                        <p> {dato.id} </p>
-                        <p> {dato.name} </p>
-                        <p> {dato[props.text]} </p>
-                    </li>
+                    <div className="row content-row">
+                        <li key={key} onClick={(e) => handleClick(e, dato)} className="row">
+                            <p> {dato.id} </p>
+                            <p> {dato.name} </p>
+                            <p> {dato[props.text]} </p>
+                        </li>
+                        <p onClick={(e) => confimeDelete(e, dato) }>borrar</p>
+                    </div>
                 )
 
             });

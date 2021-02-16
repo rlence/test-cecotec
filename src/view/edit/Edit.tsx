@@ -3,14 +3,16 @@ import './edit.scss';
 import '../../index.scss';
 import { connect } from 'react-redux';
 import {changePath, saveListClient, saveListProduct} from '../../Redux/Actions/actions';
-import ListData from '../../components/listData/ListData';
 import {getListCLient, getListProducts} from '../../api/dashboard';
 
 function Edit(props:any){
-    console.log(props)
+    const location = window.location.pathname.split('/');
+    const path = location[2];
+
     useEffect(()=>{
         props.pathChange(window.location.pathname)
     },[])
+
     return(
         <div>
             hola
@@ -26,7 +28,6 @@ const mapStateToProps = (state:any, props:any) => {
         product:state.product,
         selectClient: state.selectClient,
         selectedProduct: state.selectedProduct
-
     }
 
 };

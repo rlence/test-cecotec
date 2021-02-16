@@ -1,0 +1,82 @@
+.content-modal{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.438);
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    z-index: 3;
+    
+    .centet-card{
+        width: 50%;
+        margin: 10% auto;
+
+        .modal-body{
+            padding: 2%;
+
+            .line-btns{
+                margin: 2% 0;
+                width: 100%;
+                justify-content: space-evenly;
+
+                button{
+                    width: 40%;
+                    padding: 1%;
+                    border: none;
+                    border-radius: 15px;
+                }
+
+            }
+        }
+    }
+}
+
+//ipad landscape
+@media screen and (max-width: 1024px) {
+    .content-modal{
+
+        .centet-card{
+            width: 70%;
+            margin: 10% auto;
+
+        }
+    }
+}
+
+//ipad
+@media screen and (max-width: 800px) {
+    .content-modal{
+
+        .centet-card{
+            width: 70%;
+            margin: 10% auto;
+
+        }
+    }
+}
+
+
+//phone landscape
+@media screen and (max-width: 750px) {
+    .content-modal{
+
+        
+        .centet-card{
+            width: 80%;
+            margin: 10% auto;
+
+        }
+    }
+}
+
+//phone
+@media screen and (max-width: 600px) {
+    .content-modal{
+
+        
+        .centet-card{
+            width: 80%;
+            margin: 10% auto;
+
+        }
+    }
+}

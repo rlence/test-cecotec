@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {changePath, saveListClient, saveListProduct} from '../../Redux/Actions/actions';
 import ListData from '../../components/listData/ListData';
 import {getListCLient, getListProducts} from '../../api/dashboard';
+import Modal from '../../components/modal/Modal';
 
 
 function Dashboard(props:any){
@@ -12,6 +13,13 @@ function Dashboard(props:any){
 
     const [errClient, setErrCLient] = useState(false);
     const [errProduct, setErrProducts] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [dataModal, setDataModal] = useState({
+        id:'',
+        name:'',
+        price:'',
+        type:''
+    })
 
     useEffect(()=>{
         props.pathChange('/dashboard')
@@ -45,6 +53,8 @@ function Dashboard(props:any){
                         error={errClient}
                         text='date'
                         to="/edit/client"
+                        setModal={setModal}
+                        setDataModal={setDataModal}
                     />
                 </div>
                 <div  className="list">
@@ -54,9 +64,12 @@ function Dashboard(props:any){
                         error={errProduct}
                         text='price'
                         to='/edit/product'
+                        setModal={setModal}
+                        setDataModal={setDataModal}
                     />
                 </div>
             </div>
+            {modal ? <Modal selected={dataModal}  setModal={setModal} /> : null}
         </div>
     )
 }
@@ -66,7 +79,9 @@ const mapStateToProps = (state:any, props:any) => {
     return{
         path:state.path,
         clients:state.client,
-        product:state.product
+        product:state.product,
+        selectClient:state.selectClient,
+        selectedProduct:state.selectedProduct
     }
 
 };
