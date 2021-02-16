@@ -9,10 +9,7 @@ function Layout(props:any){
             </div>
             <div>
                 {props.children}
-            </div>
-            <div className="">
-                footer
-            </div>
+            </div>∫
         </div>
     )
 }

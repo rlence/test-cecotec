@@ -4,10 +4,12 @@ import '../../index.scss'
 import Error from '../../components/error/Error';
 import Spinner from '../../components/spinner/Spinner';
 import{ login } from '../../api/login';
+import { connect } from 'react-redux';
+import {userLogin} from '../../Redux/Actions/actions';
 
 
 function Login(props:any){
-  
+    console.log(props)
     const [user, setUser] = useState({
         username:'',
         password:''
@@ -41,6 +43,7 @@ function Login(props:any){
             login(user)
             .then( res => {
                 setLoading(false);
+                props.isAuthUser(true);
                 props.history.push('/dashboard');
             })
             .catch(err => {
@@ -83,5 +86,19 @@ function Login(props:any){
 
 }
 
+const mapStateToProps = (state:any, props:any) => {
 
-export default Login;
+    return{
+        isAuth:state.isAuth,
+    }
+
+};
+
+const mapDispatchToProps = (dispatch:any, props:any) => {
+    return {
+        isAuthUser: (isLogin:boolean)=> dispatch(userLogin(isLogin))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
