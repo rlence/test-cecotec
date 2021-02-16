@@ -3,7 +3,6 @@ import Navbar from '../components/navbar/Navbar';
 import {connect} from 'react-redux';
 
 function Layout(props:any){
-    console.log(props, 'layOut')
     return(
         <div>
             <div>

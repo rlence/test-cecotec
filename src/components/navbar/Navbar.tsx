@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './navbar.scss';
 import '../../index.scss';
 import {connect} from 'react-redux';
@@ -11,14 +11,22 @@ function NavBar(props:any){
       to:''
     })
 
+    useEffect(() =>{
+      setRedirect({
+        state:false,
+        to:''
+      })
+    },[props.path])
+
     const handleClick = (e:any) => {
       e.preventDefault();
-      console.log('haciendo click')
+
       if(props.isAuth == true){
         setRedirect({
           state: true,
           to:"/dashboard"
         })
+
       }else{
         setRedirect({
           state: true,
@@ -36,8 +44,8 @@ function NavBar(props:any){
               </div>
              {props.path != '/' ?
                  <nav className="row nav-link">
-                 <NavLink className="link" to="/client"> Clientes </NavLink>
-                 <NavLink  className="link" to="/product"> Productos </NavLink>
+                 <NavLink className="link" to="/edit/client"> Clientes </NavLink>
+                 <NavLink  className="link" to="/edit/product"> Productos </NavLink>
                </nav>
                : null
              }

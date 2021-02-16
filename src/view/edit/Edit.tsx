@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './edit.scss';
 import '../../index.scss';
 import { connect } from 'react-redux';
@@ -7,7 +7,10 @@ import ListData from '../../components/listData/ListData';
 import {getListCLient, getListProducts} from '../../api/dashboard';
 
 function Edit(props:any){
-
+    console.log(props)
+    useEffect(()=>{
+        props.pathChange(window.location.pathname)
+    },[])
     return(
         <div>
             hola
@@ -15,4 +18,26 @@ function Edit(props:any){
     )
 }
 
-export default connect(null, null)(Edit);
+const mapStateToProps = (state:any, props:any) => {
+
+    return{
+        path:state.path,
+        clients:state.client,
+        product:state.product,
+        selectClient: state.selectClient,
+        selectedProduct: state.selectedProduct
+
+    }
+
+};
+
+const mapDispatchToProps = (dispatch:any, props:any) => {
+    return {
+        pathChange: (path:string)=> dispatch(changePath(path)),
+        getAllClient: (client:any) => dispatch(saveListClient(client)),
+        getAllProduct:(products:any) => dispatch(saveListProduct(products)),
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Edit);
