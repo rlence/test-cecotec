@@ -61,7 +61,7 @@ function Login(props:any){
     }
 
     return(
-        <div className="container">
+        <div className="container container-login">
             <div className="card card-body">
                 <form onChange={handelChange} onSubmit={handelSubmit}>
                     <div className=" column content-card">

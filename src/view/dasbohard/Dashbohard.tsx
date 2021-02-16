@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import './dashboard.scss';
+import '../../index.scss';
 import { connect } from 'react-redux';
 import {changePath} from '../../Redux/Actions/actions';
+import ListData from '../../components/listData/ListData';
+import Spinner from '../../components/spinner/Spinner';
+import Error from '../../components/error/Error';
 
 function Dashboard(props:any){
     console.log(props)
@@ -9,9 +13,21 @@ function Dashboard(props:any){
         props.pathChange('/dashboard')
     },[])
 
+
     return(
-        <div>
-            en el home
+        <div className="container container-dash">
+            <div className="row">
+                <div className="list">
+                    <ListData 
+                        title="Lista de Clientes"
+                    />
+                </div>
+                <div  className="list">
+                    <ListData
+                        title="Lista de Productos"
+                    />
+                </div>
+            </div>
         </div>
     )
 }
@@ -19,7 +35,6 @@ function Dashboard(props:any){
 const mapStateToProps = (state:any, props:any) => {
 
     return{
-        isAuth:state.isAuth,
         path:state.path,
     }
 

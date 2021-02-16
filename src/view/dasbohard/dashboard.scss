@@ -1,0 +1,33 @@
+@import '../../styles/colors.scss';
+
+.container-dash{
+    background-color: $color-background;
+    height: 90vh;
+
+    .list{
+        width: 46%;
+        padding: 2%;
+    }
+}
+
+
+//phone landscape
+@media screen and (max-width: 750px) {
+    .list{
+        width: 90% !important;
+        padding: 0%;
+        margin: auto;
+    }
+}
+
+//phone
+@media screen and (max-width: 600px) {
+    .list{
+        width: 90% !important;
+        padding: 0%;
+        margin: auto;
+    }
+}
+
+
+

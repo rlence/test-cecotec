@@ -6,7 +6,7 @@ function Layout(props:any){
     console.log(props, 'layOut')
     return(
         <div>
-            <div className="">
+            <div>
                 <Navbar /> 
             </div>
             <div>
