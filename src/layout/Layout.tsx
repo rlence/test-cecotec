@@ -11,7 +11,7 @@ function Layout(props:any){
             </div>
             <div>
                 {props.children}
-            </div>∫
+            </div>
         </div>
     )
 }

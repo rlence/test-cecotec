@@ -39,7 +39,8 @@
     }
 }
 
-@media screen and (max-width: 992px) {
+//ipad landscape
+@media screen and (max-width: 1024px) {
     .card-body{
         width: 70% !important;
 
@@ -53,10 +54,42 @@
     }
 }
 
+//ipad
+@media screen and (max-width: 800px) {
+    .card-body{
+        width: 70% !important;
+
+        .from-inputs{
+            padding: 3% !important;
+        }
+
+        .form-button{
+            padding: 3% !important;
+        }
+    }
+}
+
+//phone landscape
+@media screen and (max-width: 750px) {
+    .card-body{
+        width: 50% !important;
+        height: 65%;
+    }
+
+    .from-inputs{
+        padding: 2% !important;
+    }
+
+    .form-button{
+        padding: 2% !important;
+    }
+}
+
+//phone
 @media screen and (max-width: 600px) {
     .card-body{
         width: 90% !important;
-        height: 30%;
+        height: 40%;
     }
 
     .from-inputs{
@@ -67,5 +100,6 @@
         padding: 4% !important;
     }
 }
+
 
 
