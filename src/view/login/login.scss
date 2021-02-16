@@ -1,9 +1,10 @@
+@import "../../styles/colors.scss";
 
 .container{
     height: 90vh;
     display: flex;
     justify-content: center;
-    background-color: #206f7e ;
+    background-color: $color-background;
 
     .card-body{
         width: 40%;
@@ -18,7 +19,7 @@
                 border-radius: 15px;
                 margin: 5% 0px;
                 padding: 2%;
-                border: 1px solid rgb(177, 177, 177);
+                border: 1px solid $border-card;
             }
         }
     
@@ -30,8 +31,8 @@
                 margin: 2%;
                 width: 100%;
                 padding: 2%;
-                color: #ffff;
-                background-color: #198753;
+                color: $color-white;
+                background-color: $color-green-login;
                 border-radius: 15px;
                 border: none;
             }

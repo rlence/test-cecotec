@@ -12,25 +12,26 @@ const initialState = {
     product:[]
 }
 
-type Action = {
-    type:'LOGIN',
-    payload:boolean
-}
-
 
 export const actionTypes = {
-    IS_AUTH:'LOGIN'
+    IS_AUTH:'LOGIN',
+    PATH:'PAHT'
 }
 
-export default (state:State = initialState, action:Action ) => {
+export default (state:State = initialState, action:any ) => {
 
     switch(action.type){
 
         case actionTypes.IS_AUTH:
-            console.log('action', action.payload)
             return{
                 ...state,
                 isAuth: action.payload
+            }
+
+        case actionTypes.PATH:
+            return{
+                ...state,
+                path: action.payload
             }
         
         default:

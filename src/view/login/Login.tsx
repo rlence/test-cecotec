@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState ,useEffect} from 'react';
 import './login.scss';
 import '../../index.scss'
 import Error from '../../components/error/Error';
 import Spinner from '../../components/spinner/Spinner';
 import{ login } from '../../api/login';
 import { connect } from 'react-redux';
-import {userLogin} from '../../Redux/Actions/actions';
+import {userLogin, changePath} from '../../Redux/Actions/actions';
 
 
 function Login(props:any){
-    console.log(props)
+    
+    useEffect(()=>{
+        props.pathChange('/')
+    },[])
+
     const [user, setUser] = useState({
         username:'',
         password:''
@@ -44,7 +48,7 @@ function Login(props:any){
             .then( res => {
                 setLoading(false);
                 props.isAuthUser(true);
-                //props.history.push('/dashboard');
+                props.history.push('/dashboard');
             })
             .catch(err => {
                 setLoading(false);
@@ -96,7 +100,8 @@ const mapStateToProps = (state:any, props:any) => {
 
 const mapDispatchToProps = (dispatch:any, props:any) => {
     return {
-        isAuthUser: (isLogin:boolean)=> dispatch(userLogin(isLogin))
+        isAuthUser: (isLogin:boolean)=> dispatch(userLogin(isLogin)),
+        pathChange: (path:string)=> dispatch(changePath(path))
     }
 }
 

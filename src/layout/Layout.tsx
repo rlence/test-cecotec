@@ -7,7 +7,7 @@ function Layout(props:any){
     return(
         <div>
             <div className="">
-                {props.path == '/' ? <Navbar /> : null}
+                <Navbar /> 
             </div>
             <div>
                 {props.children}

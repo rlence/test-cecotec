@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Login from './view/login/Login';
-import Dasbohard from './view/dasbohard/Dasbohard';
+import Dasbohard from './view/dasbohard/Dashbohard';
 
 function AppRouter() {
   return (
