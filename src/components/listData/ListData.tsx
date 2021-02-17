@@ -10,10 +10,10 @@ import {selectedClient, selectedProduct} from '../../Redux/Actions/actions';
 function ListData(props:any){
 
     const [redirect, setRedirect] = useState(false);
-
+    const type = props.to.split('/');
     const handleClick = (e:any, data:any) => {
+       
         e.preventDefault();
-        const type = props.to.split('/');
         if(type[2] == 'client'){
             props.selectOneClient(data)
         }else{  
@@ -31,17 +31,17 @@ function ListData(props:any){
 
     const listToprint = () => {
 
-        if(props.data.length == 0 && props.error == false){
+        if(props.loading == true){
             return <Spinner />
 
         }else if(props.data.length == 0 && props.error == true){
             return <Error msg="Se produjo un error" />
 
-        }else{
-            return props.data.map( ( dato:any, key:number ) => {
+        }else if(props.loading == false && props.data.length > 0){
+            return props.data.map( ( dato:any ) => {
                 return (
                     <div className="row content-row">
-                        <li key={key} onClick={(e) => handleClick(e, dato)} className="row">
+                        <li key={dato.id + type[2]} onClick={(e) => handleClick(e, dato)} className="row">
                             <p> {dato.id} </p>
                             <p> {dato.name} </p>
                             <p> {dato[props.text]} </p>
@@ -51,6 +51,15 @@ function ListData(props:any){
                 )
 
             });
+
+        }else{
+            return(
+                <div className="row content-row">
+                    <li className="row">
+                        <p>No hay datos</p>
+                    </li>
+                </div>
+            )
         }
     }
 

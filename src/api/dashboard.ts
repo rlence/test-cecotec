@@ -31,3 +31,31 @@ export async function getListProducts(){
     }
 
 }
+export async function deleteElement(id:number, type:string){
+
+    let path = '';
+    if(type == 'client'){
+        path = 'post';
+    }else{
+        path = 'comments'
+    }
+
+    try{
+
+        const res = await fetch(`${url}${path}/${id}`, {
+            method:"DELETE"
+        });
+     
+        if(res.status == 404){
+            return Promise.reject(`No se encontro ${type} para eliminar`);
+        }
+        const data = await res.json();
+        return Promise.resolve(data);
+
+    }catch(err){
+        console.log('[ERROR DELETE]: ', err);
+        return Promise.reject('Se produjo un error');
+
+    }
+
+}

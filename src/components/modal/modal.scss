@@ -1,6 +1,8 @@
+@import '../../styles//colors.scss';
+
 .content-modal{
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.438);
+    background-color: $background-modal;
     width: 100%;
     height: 100vh;
     top: 0;
@@ -23,6 +25,11 @@
                     padding: 1%;
                     border: none;
                     border-radius: 15px;
+                }
+
+                .delete{
+                    background-color: $background-error-button;
+                    color: $color-white
                 }
 
             }

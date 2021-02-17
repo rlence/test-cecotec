@@ -4,7 +4,7 @@ import '../../index.scss';
 import { connect } from 'react-redux';
 import {changePath, saveListClient, saveListProduct} from '../../Redux/Actions/actions';
 import ListData from '../../components/listData/ListData';
-import {getListCLient, getListProducts} from '../../api/dashboard';
+import {getListCLient, getListProducts, deleteElement} from '../../api/dashboard';
 import Modal from '../../components/modal/Modal';
 
 
@@ -12,6 +12,8 @@ function Dashboard(props:any){
 
 
     const [errClient, setErrCLient] = useState(false);
+    const [loadingClient, setLoadingClient] = useState(false);
+    const [loadingProduct, setLoadingProduct] = useState(false);
     const [errProduct, setErrProducts] = useState(false);
     const [modal, setModal] = useState(false);
     const [dataModal, setDataModal] = useState({
@@ -19,35 +21,54 @@ function Dashboard(props:any){
         name:'',
         price:'',
         type:''
-    })
+    });
 
     useEffect(()=>{
-        props.pathChange('/dashboard')
-        loadinData()
+        props.pathChange('/dashboard');
+        dataProducts();
+        dataClients();
     },[])
 
-    const loadinData = () => {
-        setTimeout(() => {
-            
-            getListCLient()
-            .then( data => props.getAllClient(data))
-            .catch(err => setErrCLient(true))
-
-        },2000)
-
+    const dataProducts = () => {
+        setLoadingProduct(true);
         setTimeout(() => {
             getListProducts()
-            .then( data => props.getAllProduct(data))
+            .then( data => {
+                props.getAllProduct(data)
+                setLoadingProduct(false);
+            })
             .catch( err => setErrProducts(true))
         },3000)
     }
 
+    const dataClients = () => {
+        setLoadingClient(true);
+        setTimeout(() => {
+            
+            getListCLient()
+            .then( data => {
+                props.getAllClient(data)
+                setLoadingClient(false);
+            })
+            .catch(err => setErrCLient(true))
+
+        },2000)
+    }
+
+    const refresData = () => {
+        if(dataModal.type == 'client'){
+            dataClients()
+        }else{
+            dataProducts()
+        }
+    }
 
     return(
         <div className="container container-dash">
             <div className="row">
                 <div className="list">
                     <ListData 
+                        loading={loadingClient}
                         title="Lista de Clientes"
                         data={props.clients}
                         error={errClient}
@@ -59,6 +80,7 @@ function Dashboard(props:any){
                 </div>
                 <div  className="list">
                     <ListData
+                        loading={loadingProduct}
                         title="Lista de Productos"
                         data={props.product}
                         error={errProduct}
@@ -69,7 +91,7 @@ function Dashboard(props:any){
                     />
                 </div>
             </div>
-            {modal ? <Modal selected={dataModal}  setModal={setModal} /> : null}
+            {modal ? <Modal selected={dataModal}  setModal={setModal}  refresData={refresData} /> : null}
         </div>
     )
 }
