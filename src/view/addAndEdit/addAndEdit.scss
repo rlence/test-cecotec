@@ -1,13 +1,48 @@
+@import '../../styles/colors.scss';
 
 .add-and-ed{
     padding-top: 5%;
 
     .container-card{
-        width: 60%;
+        width: 40%;
         margin: auto;
+
+        .title-card{
+            padding-top: 1%;
+            text-align: center;
+        }
+
+        .form-inputs{
+            margin: auto;
+            width: 50%;
+            padding: 3% 0;
+            padding-bottom: 4%;
+
+            input{
+                margin: 4% 0;
+                border: 1px solid $border-card ;
+                border-radius: 15px;
+                padding: 3%;
+            }
+
+            button{
+                margin-top: 4%;
+                border: none;
+                border-radius: 15px;
+                padding: 2.5%;
+                background-color: $color-green-login;
+                color: $color-white;
+            }
+        }
+
+        .message{
+            width: 60%;
+            margin: auto;
+            padding-bottom: 2%;
+        }
+
+
     }
 
-    .title-card{
-        text-align: center;
-    }
+    
 }
