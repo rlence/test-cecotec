@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import '../../index.scss';
 import './listData.scss';
 import { connect } from 'react-redux';
@@ -45,8 +45,11 @@ function ListData(props:any){
                             <p> {dato.id} </p>
                             <p> {dato.name} </p>
                             <p> {dato[props.text]} </p>
+                            <p> {dato.date} </p>
                         </li>
-                        <p onClick={(e) => confimeDelete(e, dato) }>borrar</p>
+                        <p className="icon" onClick={(e) => confimeDelete(e, dato)} > 
+                            <i className="fas fa-trash-alt"></i> 
+                        </p>
                     </div>
                 )
 
@@ -65,8 +68,13 @@ function ListData(props:any){
 
     return(
         <div className="card content-list-data">
-            <div className="title-card">
-                <h2> {props.title} </h2>
+            <div className="title-card row" >
+                <div>
+                    <h2> {props.title} </h2>
+                </div>
+                <Link className="icon" to={props.add}>
+                    <i className="fas fa-plus"></i>
+                </Link>
             </div>
             <div className="body-card">
                 <ul>

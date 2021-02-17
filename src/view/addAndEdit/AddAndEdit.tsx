@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import './edit.scss';
+import './addAndedit.scss';
 import '../../index.scss';
 import { connect } from 'react-redux';
 import {changePath, saveListClient, saveListProduct} from '../../Redux/Actions/actions';
 import {getListCLient, getListProducts} from '../../api/dashboard';
 
-function Edit(props:any){
+function AddAndEdit(props:any){
     const location = window.location.pathname.split('/');
-    const path = location[2];
+    const action = location[1]
+    const type = location[2];
+    console.log(type , action)
 
     useEffect(()=>{
         props.pathChange(window.location.pathname)
@@ -41,4 +43,4 @@ const mapDispatchToProps = (dispatch:any, props:any) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Edit);
+export default connect(mapStateToProps, mapDispatchToProps)(AddAndEdit);

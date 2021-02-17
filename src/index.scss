@@ -1,3 +1,5 @@
+@import './styles//colors.scss';
+
 .row{
     display: flex;
     flex-direction: row;
@@ -14,10 +16,18 @@
 }
 
 .card{
-    background-color: #ffffff;
+    background-color: $color-white;
     border-radius: 15px;
-    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-    -moz-box-shadow:    3px 3px 5px 6px #ccc;  
-    box-shadow:         3px 3px 5px 6px #ccc; 
+    -webkit-box-shadow: 3px 3px 5px 6px $shadow-card;
+    -moz-box-shadow:    3px 3px 5px 6px $shadow-card;  
+    box-shadow:         3px 3px 5px 6px $shadow-card; 
 
+}
+
+.icon{
+    color: $color-icon;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
 }

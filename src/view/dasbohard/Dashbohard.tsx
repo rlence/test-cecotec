@@ -72,8 +72,9 @@ function Dashboard(props:any){
                         title="Lista de Clientes"
                         data={props.clients}
                         error={errClient}
-                        text='date'
+                        text='totalPurchase'
                         to="/edit/client"
+                        add="/add/client"
                         setModal={setModal}
                         setDataModal={setDataModal}
                     />
@@ -86,6 +87,7 @@ function Dashboard(props:any){
                         error={errProduct}
                         text='price'
                         to='/edit/product'
+                        add="/add/product"
                         setModal={setModal}
                         setDataModal={setDataModal}
                     />
