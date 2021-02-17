@@ -1,8 +1,7 @@
 @import '../../styles/colors.scss';
 
 .container-dash{
-    background-color: $color-background;
-    height: 90vh;
+    min-height: 100vh;
 
     .list{
         width: 46%;

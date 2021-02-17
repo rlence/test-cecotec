@@ -1,10 +1,9 @@
 @import "../../styles/colors.scss";
 
 .container-login{
-    height: 90vh;
     display: flex;
     justify-content: center;
-    background-color: $color-background;
+
 
     .card-body{
         width: 40%;

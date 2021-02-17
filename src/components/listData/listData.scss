@@ -32,19 +32,33 @@
             padding: 0 2%;
 
             li{
-                width: 80%;
+                width: 90%;
                 justify-content: space-around;
                 cursor: pointer;
                 padding: 2% 0;
                 margin: auto;
-    
+                text-align: center;
                 p{
                     margin: 0px;
+                    width: 25%;
                 }
             }
         }
         
+    }
+}
 
 
+//phone landscape
+@media screen and (max-width: 750px) {
+    .content-list-data{
+        margin: 3% auto;
+    }
+}
+
+//phone
+@media screen and (max-width: 600px) {
+    .content-list-data{
+        margin: 3% auto;
     }
 }

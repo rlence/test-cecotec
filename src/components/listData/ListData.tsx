@@ -42,7 +42,7 @@ function ListData(props:any){
                 return (
                     <div className="row content-row">
                         <li key={dato.id + type[2]} onClick={(e) => handleClick(e, dato)} className="row">
-                            <p> {dato.id} </p>
+                            <p className="id"> {dato.id} </p>
                             <p> {dato.name} </p>
                             <p> {dato[props.text]} </p>
                             <p> {dato.date} </p>
@@ -78,6 +78,15 @@ function ListData(props:any){
             </div>
             <div className="body-card">
                 <ul>
+                    <div className="content-row">
+                        <li className="row">
+                            <p>ID</p>
+                            <p>Nombre</p>
+                            <p>{type[2] == 'client' ? 'Total de compra': 'Precio'}</p>
+                            <p>Fecha</p>
+                        </li>
+                    </div>
+                    
                     {listToprint()}
                 </ul>
             </div>
