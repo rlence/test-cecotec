@@ -1,4 +1,5 @@
 import { url } from '../config/config';
+import moment from 'moment'
 
 export async function updateElement(id:number, data:any, type:string) {
     try{
@@ -14,7 +15,7 @@ export async function updateElement(id:number, data:any, type:string) {
             body:JSON.stringify(data)
         });
         const dataJson = await res.json();
-        console.log(dataJson);
+        return Promise.resolve(dataJson);
 
     }catch(error){
         console.log('[ERROR CREATE]:', error);
@@ -25,10 +26,12 @@ export async function updateElement(id:number, data:any, type:string) {
 export async function createElement(data:any, type:string){
 
     try{
+        data.date = moment().format('YYYY-MM-DD');
         let path = '';
         if(type == 'client'){
             path = 'post'
         }else{
+            data.price = data.price + '€';
             path = 'comments'
         }
 
@@ -37,7 +40,7 @@ export async function createElement(data:any, type:string){
             body:JSON.stringify(data)
         });
         const dataJson = await res.json();
-        console.log(dataJson);
+        return Promise.resolve(dataJson);
 
     }catch(err){
         console.log('[ERROR CREATE]:', err);

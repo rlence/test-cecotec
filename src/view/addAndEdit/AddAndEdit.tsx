@@ -2,8 +2,8 @@ import React, { useEffect, useState, Fragment} from 'react';
 import './addAndEdit.scss';
 import '../../index.scss';
 import { connect } from 'react-redux';
-import {changePath, saveListClient, saveListProduct} from '../../Redux/Actions/actions';
-import {getListCLient, getListProducts} from '../../api/dashboard';
+import { changePath } from '../../Redux/Actions/actions';
+import { updateElement, createElement } from '../../api/createAndEdti';
 import Error from '../../components/error/Error';
 import Spinner from '../../components/spinner/Spinner';
 
@@ -15,7 +15,8 @@ function AddAndEdit(props:any){
         add: 'Añadir',
         client:'cliente',
         product:'producto',
-        email:'Email'
+        email:'Email',
+        edit:'Editar'
     }
 
 
@@ -23,7 +24,7 @@ function AddAndEdit(props:any){
     const action = location[1]; //type of action edit or add
     const type = location[2]; //type of element client or product
 
-    const clientPropieties = ['name', 'totalPurchase'];
+    const clientPropieties = ['name', 'email'];
     const productPropieties = ['name', 'price']
 
     const [state, setState] = useState<any>({});
@@ -120,8 +121,44 @@ function AddAndEdit(props:any){
         setError({
             err:false,
             msg:''
-        })
+        });
 
+        setTimeout(() =>{
+            if(action == 'edit'){
+                if(type == 'client'){
+                    uppdate(props.selectClient.id);
+                }else{
+                    uppdate(props.selectedProduct.id); 
+                }
+            }else{
+                createElement(state, type)
+                .then( data => {
+                    setLoading(false);
+                })
+                .catch(err => {
+                    setLoading(false);
+                    setError({
+                        err:true,
+                        msg: err
+                    })
+                })  
+            }
+        }, 2000)
+
+    }
+
+    const uppdate = (id:number) => {
+        updateElement(id, state, type)
+        .then( data => {
+            setLoading(false);
+        })
+        .catch(err => {
+            setLoading(false);
+            setError({
+                err:true,
+                 msg: err
+            })
+        })
     }
 
     console.log(state)
