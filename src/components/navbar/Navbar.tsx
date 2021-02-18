@@ -42,10 +42,9 @@ function NavBar(props:any){
               <div className="img-nav">
                 <img onClick={handleClick} src="https://www.pkfdcm.com/wp-content/uploads/2019/12/Cecotec_nuevo_programa_pagares_2019_.png" />
               </div>
-             {props.path != '/' ?
+             {props.path != '/' && props.path != '/dashboard' ?
                 <nav className="row nav-link">
-                  <NavLink className="link" to="/add/client"> Clientes </NavLink>
-                  <NavLink  className="link" to="/add/product"> Productos </NavLink>
+                  <NavLink className="link" to="/dashboard"> Ir a Panel </NavLink>
                 </nav>
                : null
              }

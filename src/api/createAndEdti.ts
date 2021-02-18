@@ -5,14 +5,17 @@ export async function updateElement(id:number, data:any, type:string) {
     try{
         let path = '';
         if(type == 'client'){
-            path = 'post'
+            path = 'posts'
         }else{
             path = 'comments'
         }
 
         const res = await fetch(`${url}${path}/${id}`,{
             method:'PUT',
-            body:JSON.stringify(data)
+            body:JSON.stringify(data),
+            headers:{
+                "Content-Type":"application/json"
+            }
         });
         const dataJson = await res.json();
         return Promise.resolve(dataJson);
@@ -29,7 +32,7 @@ export async function createElement(data:any, type:string){
         data.date = moment().format('YYYY-MM-DD');
         let path = '';
         if(type == 'client'){
-            path = 'post'
+            path = 'posts'
         }else{
             data.price = data.price + '€';
             path = 'comments'
@@ -37,8 +40,16 @@ export async function createElement(data:any, type:string){
 
         const res = await fetch(`${url}${path}`,{
             method:'POST',
-            body:JSON.stringify(data)
+            body:JSON.stringify(data),
+            headers:{
+                "Content-Type":"application/json"
+            }
         });
+
+        if(res.status!= 201){
+            return Promise.reject('Se produjo un error')
+        }
+
         const dataJson = await res.json();
         return Promise.resolve(dataJson);
 

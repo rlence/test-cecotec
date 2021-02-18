@@ -6,6 +6,7 @@ import { changePath } from '../../Redux/Actions/actions';
 import { updateElement, createElement } from '../../api/createAndEdti';
 import Error from '../../components/error/Error';
 import Spinner from '../../components/spinner/Spinner';
+import Success from '../../components/success/Success';
 
 function AddAndEdit(props:any){
 
@@ -33,11 +34,26 @@ function AddAndEdit(props:any){
         msg:''
     });
     const [loading, setLoading] = useState(false);
-
-    console.log(type , action)
+    const [success, setSuccess] = useState({
+        state:false,
+        msg:''
+    })
 
     useEffect(()=>{
         props.pathChange(window.location.pathname)
+        if(action == 'add'){
+            if(type == 'client'){
+                setState({name:'', email:''})
+            }else{
+                setState({name:'', price:''})
+            }
+        }else{
+            if(type == 'client'){
+                setState(props.selectClient)
+            }else{
+                setState(props.selectedProduct)
+            }
+        }
     },[])
 
     const addOrEdit = () => {
@@ -55,7 +71,7 @@ function AddAndEdit(props:any){
                 return  (
                     <Fragment>
                         <label>{translate[propierty]}</label>
-                        <input type="text" key={index} name={propierty} />
+                        <input type="text" key={index} name={propierty} value={state[propierty]} />
                     </Fragment>
                 )
             });
@@ -64,7 +80,7 @@ function AddAndEdit(props:any){
                 return  (
                     <Fragment>
                         <label>{translate[propierty]}</label>
-                        <input type="text" key={index} name={propierty} />
+                        <input type="text" key={index} name={propierty} value={state[propierty]} />
                     </Fragment>
                 )
             });
@@ -77,7 +93,7 @@ function AddAndEdit(props:any){
                 return  (
                     <Fragment>
                         <label>{translate[propierty]}</label>
-                        <input type="text" name={propierty} key={index} defaultValue={props.selectClient[propierty]} />
+                        <input type="text" name={propierty} key={index} value={state[propierty]} />
                     </Fragment>
                 )
             });
@@ -86,7 +102,7 @@ function AddAndEdit(props:any){
                 return  (
                     <Fragment>
                         <label>{translate[propierty]}</label>
-                        <input type="text" key={index} name={propierty} defaultValue={props.selectedProduct[propierty]} />
+                        <input type="text" key={index} name={propierty} value={state[propierty]} />
                     </Fragment>
                 )
             });
@@ -94,16 +110,19 @@ function AddAndEdit(props:any){
     }
 
     const handelChane = (e:any) => {
-        console.log(e.target.name)
         setState( { ...state ,[e.target.name]:e.target.value })
     }
 
     const handelSubmit = (e:any) => {
         e.preventDefault();
+        setSuccess({
+            state:false,
+            msg:''
+        })
         let isEmpty = false;
+        //to validate any propienty is empty
         for(let key in state){
-            console.log(key)
-            console.log(state[key])
+
             if(state[key] == ''){
                 isEmpty = true;
             }
@@ -134,6 +153,23 @@ function AddAndEdit(props:any){
                 createElement(state, type)
                 .then( data => {
                     setLoading(false);
+                    setSuccess({
+                        state:true,
+                        msg:`El ${translate[type]} se creo correctamente`
+                    })
+                    if(type == 'client'){
+                        setState({name:'', email:''})
+                    }else{
+                        setState({name:'', price:''})
+                    }
+
+                    setTimeout(()=>{
+                        setSuccess({
+                            state:false,
+                            msg:''
+                        })
+                    }, 1000)
+
                 })
                 .catch(err => {
                     setLoading(false);
@@ -151,6 +187,33 @@ function AddAndEdit(props:any){
         updateElement(id, state, type)
         .then( data => {
             setLoading(false);
+            setSuccess({
+                state:true,
+                msg:`El ${translate[type]} se creo correctamente`
+            })
+
+            if(type == 'client'){
+                setState({
+                
+                    date:'',
+                    name:'',
+                    email:''
+                })
+            }else{
+                setState({
+                
+                    date:'',
+                    name:'',
+                    price:''
+                })
+            }
+            setTimeout(()=>{
+                setSuccess({
+                    state:false,
+                    msg:''
+                })
+            }, 1000)
+            
         })
         .catch(err => {
             setLoading(false);
@@ -160,8 +223,6 @@ function AddAndEdit(props:any){
             })
         })
     }
-
-    console.log(state)
 
     return(
         <div className="container add-and-ed">
@@ -182,6 +243,7 @@ function AddAndEdit(props:any){
                     </form>
                     <div className="message">
                         {error.err ? <Error msg={error.msg} /> : null}
+                        {success.state ? <Success msg={success.msg} /> : null } 
                     </div>
                     
                 </div>
