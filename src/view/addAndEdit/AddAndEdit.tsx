@@ -9,6 +9,16 @@ import Spinner from '../../components/spinner/Spinner';
 
 function AddAndEdit(props:any){
 
+    const translate:any = {
+        name:'Nombre',
+        price:'Precio',
+        add: 'Añadir',
+        client:'cliente',
+        product:'producto',
+        email:'Email'
+    }
+
+
     const location = window.location.pathname.split('/');
     const action = location[1]; //type of action edit or add
     const type = location[2]; //type of element client or product
@@ -41,11 +51,21 @@ function AddAndEdit(props:any){
     const clientOrProductAdd = () => {
         if(type=='client'){
             return clientPropieties.map( (propierty:string, index:number) => {
-                return  <input type="text" key={index} name={propierty} />
+                return  (
+                    <Fragment>
+                        <label>{translate[propierty]}</label>
+                        <input type="text" key={index} name={propierty} />
+                    </Fragment>
+                )
             });
         }else{
             return productPropieties.map( (propierty:string, index:number) => {
-                return  <input type="text" key={index} name={propierty} />
+                return  (
+                    <Fragment>
+                        <label>{translate[propierty]}</label>
+                        <input type="text" key={index} name={propierty} />
+                    </Fragment>
+                )
             });
         }
     }
@@ -53,13 +73,18 @@ function AddAndEdit(props:any){
     const clientOrProductEdit = () =>{
         if(type=='client'){
             return clientPropieties.map( (propierty:string, index:number) => {
-                return  <input type="text" name={propierty} key={index} defaultValue={props.selectClient[propierty]} />
+                return  (
+                    <Fragment>
+                        <label>{translate[propierty]}</label>
+                        <input type="text" name={propierty} key={index} defaultValue={props.selectClient[propierty]} />
+                    </Fragment>
+                )
             });
         }else{
             return productPropieties.map( (propierty:string, index:number) => {
                 return  (
                     <Fragment>
-                        <label>{propierty}</label>
+                        <label>{translate[propierty]}</label>
                         <input type="text" key={index} name={propierty} defaultValue={props.selectedProduct[propierty]} />
                     </Fragment>
                 )
@@ -106,7 +131,7 @@ function AddAndEdit(props:any){
             <div className="container-card">
                 <div className="card">
                     <div className="title-card">
-                        <h2> {action.charAt(0).toUpperCase() + action.slice(1)} {type} </h2>
+                        <h2> {translate[action]} {translate[type]} </h2>
                     </div>
                     <form className="column form-inputs" onChange={handelChane} onSubmit={handelSubmit} >
                         {addOrEdit()}

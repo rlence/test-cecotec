@@ -44,9 +44,21 @@
                 }
             }
         }
+
+        .id{
+            width: 5% !important;
+        }
+
+        .email{
+            width: 40% !important;
+            text-align: center;
+        
+        }
         
     }
 }
+
+
 
 
 //phone landscape
@@ -60,5 +72,8 @@
 @media screen and (max-width: 600px) {
     .content-list-data{
         margin: 3% auto;
+    }
+    .email{
+        overflow-y: scroll;
     }
 }

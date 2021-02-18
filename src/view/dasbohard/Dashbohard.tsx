@@ -72,7 +72,7 @@ function Dashboard(props:any){
                         title="Lista de Clientes"
                         data={props.clients}
                         error={errClient}
-                        text='totalPurchase'
+                        text='email'
                         to="/edit/client"
                         add="/add/client"
                         setModal={setModal}

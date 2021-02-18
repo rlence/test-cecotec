@@ -44,7 +44,7 @@ function ListData(props:any){
                         <li key={dato.id + type[2]} onClick={(e) => handleClick(e, dato)} className="row">
                             <p className="id"> {dato.id} </p>
                             <p> {dato.name} </p>
-                            <p> {dato[props.text]} </p>
+                            <p className="email"> {dato[props.text]} </p>
                             <p> {dato.date} </p>
                         </li>
                         <p className="icon" onClick={(e) => confimeDelete(e, dato)} > 
@@ -80,9 +80,9 @@ function ListData(props:any){
                 <ul>
                     <div className="content-row">
                         <li className="row">
-                            <p>ID</p>
+                            <p className="id">ID</p>
                             <p>Nombre</p>
-                            <p>{type[2] == 'client' ? 'Total de compra': 'Precio'}</p>
+                            <p className="email">{type[2] == 'client' ? 'Email': 'Precio'}</p>
                             <p>Fecha</p>
                         </li>
                     </div>
